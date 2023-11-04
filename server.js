@@ -1,8 +1,8 @@
-
-let queryMysql = require('./mysqlconnection');
-let express = require('express');
-let app = express();
-let bodyParser = require('body-parser');
+const puppeteer = require('puppeteer');
+const queryMysql = require('./mysqlconnection');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
 // Create application/x-www-form-urlencoded parser
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -14,21 +14,27 @@ app.get('/index.html', function(req,res){
 
 app.post('/process_post', urlencodedParser, function (req, res) {
     // Prepare output in JSON format
+    let div = document.getElementById("result")
     response = {
        first_name:req.body.first_name,
        last_name:req.body.last_nam
     };
+    div.innerText = 
     console.log(response);
     res.end(JSON.stringify(response));
  })
 
+ 
 
 app.get('/process_get', function (req, res) {
     // Prepare output in JSON format
+    
     response = queryMysql();
-    console.log();
+ 
+   
     queryMysql();
     res.end(response);
+    pup()
  })
 
 // This responds with "hellow word" on the homepage
@@ -49,19 +55,27 @@ app.delete('del_user',function(req, res){
     res.send('Page listing');
 })
 
-//this responds a get request for the /list_user page
-app.get('/list_user', function(req, res){
-    console.log("Got a get request for /list_user");
-    res.send('Page Listing');
-})
-
-//This respnds a get request for abcd, abxcd, ab123cd, and so on 
-app.get('/ab*cd', function(req,res){
-    console.log("Got a Get request for /ab*cd");
-    res.send('Page Pattern Match');
-})
 
 
+
+
+
+async function pup() {
+    const browser = await puppeteer.launch();
+    page = await browser.newPage();
+        await page.goto('file:///Users/caonabocastro/Desktop/basicRouting/BasicGetAndPost/index.html', {waitUntil: 'load'});
+
+
+    const newPage = await page.evaluate(() => {
+
+        return  document.getElementById("result").innerText;
+
+        });
+
+     console.log(newPage)
+  
+    await browser.close();
+  };
 
 let server = app.listen(8081, function () {
    let host = server.address().address

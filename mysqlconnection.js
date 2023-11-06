@@ -1,7 +1,14 @@
+let mysql = require('mysql2');
 
+let mysqlResults; 
 module.exports =function connectToMysql(){
-    let mysql = require('mysql2');
-    let connec = mysql.createConnection({
+    
+
+
+
+
+
+    const connec = mysql.createConnection({
         host :'localhost',
         user: 'castro',
         password:'jnfh(*89LJd267*&ldkj',
@@ -10,13 +17,8 @@ module.exports =function connectToMysql(){
     });
 
     connec.connect();
-    connec.query('select * from walmartproducts',
-                    function(error, results, fields){
-                    if (error) throw error;
-                    mysqlResulst = results;
-                    console.log("results: ", results)
-                    });
-
+    let q = connec.query('select * from walmartproducts');
+    
     connec.end();
-    return mysqlResulst;
+    return q;
                 }

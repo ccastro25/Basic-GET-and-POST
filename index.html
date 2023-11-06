@@ -6,7 +6,7 @@
    <body>
 
       <form onsubmit="getDBResults()"> 
-       <input id ="searchInput" type = "search" name = "searchBar" class="serachBar" placeholder="Enter product to compare">  <br>
+       <input id ="searchInput" type = "search" name = "searchBar" class="serachB" placeholder="Enter product to compare">  <br>
        
         <input type = "submit" value = "Submit">
       </form>
@@ -17,22 +17,21 @@
          function getDBResults(){
             let searchValue = document.getElementById('searchInput').value;
             console.log(searchValue)
-            fetch('')
-                  .then((response) => {
-                  if (!response.ok) {
-                     throw new Error(`HTTP error: ${response.status}`);
-                  }
 
-                  return response.text();
-               })
-               .then((text) => {
-                  poemDisplay.textContent = text;
-               })
-
-               .catch((error) => {
-                  
-             });
+            
+            let promise=  fetch("http://localhost:8081/process_get")
+            .then((response) => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error: ${response.status}`);
+               }
+               
+            //  console.log(response.text())
+               return response.text();
+            })
          }
+
+
+            console.log(test)
 
       </script>
    </body>

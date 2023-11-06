@@ -5,30 +5,35 @@
    </head>
    <body>
 
-   
-       <input type = "text" name = "searchBar" class="serachBar" placeholder="Enter product to compare">  <br>
+      <form onsubmit="getDBResults()"> 
+       <input id ="searchInput" type = "search" name = "searchBar" class="serachBar" placeholder="Enter product to compare">  <br>
        
         <input type = "submit" value = "Submit">
-  
+      </form>
       
      <div id ="result">testing</div>
       <script>
-  
-fetch(url)
-    .then((response) => {
-     if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
 
-    return response.text();
-  })
-  .then((text) => {
-    poemDisplay.textContent = text;
-  })
+         function getDBResults(){
+            let searchValue = document.getElementById('searchInput').value;
+            console.log(searchValue)
+            fetch('')
+                  .then((response) => {
+                  if (!response.ok) {
+                     throw new Error(`HTTP error: ${response.status}`);
+                  }
 
-  .catch((error) => {
-    poemDisplay.textContent = `Could not fetch verse: ${error}`;
-  });
+                  return response.text();
+               })
+               .then((text) => {
+                  poemDisplay.textContent = text;
+               })
+
+               .catch((error) => {
+                  
+             });
+         }
+
       </script>
    </body>
 

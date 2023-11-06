@@ -1,4 +1,4 @@
-let mysqlResulst;
+
 module.exports =function connectToMysql(){
     let mysql = require('mysql2');
     let connec = mysql.createConnection({

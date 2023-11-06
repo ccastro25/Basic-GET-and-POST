@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <link rel = "stylesheet" href = "searchpage.css">
+      
    </head>
    <body>
 
-    <form action = "http://127.0.0.1:8081/process_get" method = "GET">
-       Search Product <input type = "text" name = "searchBar" class="serachBar">  <br>
+   
+       <input type = "text" name = "searchBar" class="serachBar" placeholder="Enter product to compare">  <br>
        
         <input type = "submit" value = "Submit">
-     </form>
+  
       
      <div id ="result">testing</div>
-      
+      <script>
+  
+fetch(url)
+    .then((response) => {
+     if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    return response.text();
+  })
+  .then((text) => {
+    poemDisplay.textContent = text;
+  })
+
+  .catch((error) => {
+    poemDisplay.textContent = `Could not fetch verse: ${error}`;
+  });
+      </script>
    </body>
+
 </html>

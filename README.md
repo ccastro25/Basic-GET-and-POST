@@ -1,5 +1,5 @@
 post and get portion can be found at 
-https://www.tutorialspoint.com/nodej s/nodejs_express_framework.htm
+https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
 
 mysql connection can be found at 
 https://www.npmjs.com/package/mysql

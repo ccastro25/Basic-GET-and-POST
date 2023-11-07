@@ -5,8 +5,8 @@
    </head>
    <body>
 
-      <form onsubmit="getDBInfo(); return false"> 
-       <input id ="searchInput" type = "search" name = "searchBar" class="serachB" placeholder="Enter product to compare">  <br>
+      <form onsubmit="getDBInfo(this.value); return false"> 
+       <input id ="searchInput" type = "search" name = "searchBar" class="serachB" placeholder="Enter product to compare" value="">  <br>
        
         <input type = "submit" value = "Submit">
       </form>
@@ -17,11 +17,12 @@
        
          let resultsDiv = document.getElementById("result");
 
- async function getDBInfo() {
+ async function getDBInfo(val) {
       try {
-         const response = await fetch("http://localhost:8081/process_get");
-         const resultsDiv   = await response.json();
-         response.innerText = "Product: "+result[0].ProductName + "Description: "+result[0].Description+" Price: $"+result[0].Price;
+         let url ="http://localhost:8081/process_get/" + "?"  + new URLSearchParams("foo=1&bar=2")
+         const response = await fetch(url);
+         const result  = await response.json();
+         resultsDiv.innerText = "Product: "+result[0].ProductName + "Description: "+result[0].Description+" Price: $"+result[0].Price;
          console.log("Success:", result);
       } catch (error) {
          console.error("Error:", error);

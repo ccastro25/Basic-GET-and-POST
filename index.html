@@ -5,33 +5,29 @@
    </head>
    <body>
 
-      <form onsubmit="getDBResults()"> 
+      <form onsubmit="getDBInfo(); return false"> 
        <input id ="searchInput" type = "search" name = "searchBar" class="serachB" placeholder="Enter product to compare">  <br>
        
         <input type = "submit" value = "Submit">
       </form>
       
-     <div id ="result">testing</div>
+     <div  id="result">testing</div>
       <script>
 
-         function getDBResults(){
             let searchValue = document.getElementById('searchInput').value;
             console.log(searchValue)
+         
 
+ async function getDBInfo() {
+      try {
+         const response = await fetch("http://localhost:8081/process_get");
+         const result   = await response.json();
+         console.log("Success:", result);
+      } catch (error) {
+         console.error("Error:", error);
+      }
+}
             
-            let promise=  fetch("http://localhost:8081/process_get")
-            .then((response) => {
-                if (!response.ok) {
-                  throw new Error(`HTTP error: ${response.status}`);
-               }
-               
-            //  console.log(response.text())
-               return response.text();
-            })
-         }
-
-
-            console.log(test)
 
       </script>
    </body>

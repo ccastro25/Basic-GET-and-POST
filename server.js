@@ -15,16 +15,11 @@ app.get('/index.html', function(req,res){
     //res.sendFile(__dirname + "/" +"index.html")
 })
 
-app.get('/process_get', function (req, res) {
+app.get('/process_get', async function (req, res) {
     // Prepare output in JSON format
     
-    response = queryMysql();
- 
-    response = {
-        first_name:"castr",
-        last_name:"bon"
-     };
-     console.log(response);
+     response =  await queryMysql();
+     console.log(  response);
      res.end(JSON.stringify(response));
    
  })

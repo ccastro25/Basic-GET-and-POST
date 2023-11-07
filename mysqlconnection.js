@@ -1,24 +1,11 @@
-let mysql = require('mysql2');
-
-let mysqlResults; 
-module.exports =function connectToMysql(){
+const mysql = require('mysql2/promise');
+module.exports = async function getSqlRows() {
     
-
-
-
-
-
-    const connec = mysql.createConnection({
-        host :'localhost',
-        user: 'castro',
-        password:'jnfh(*89LJd267*&ldkj',
-        database:'comparableproductsdb'
-                  
-    });
-
-    connec.connect();
-    let q = connec.query('select * from walmartproducts');
-    
-    connec.end();
-    return q;
-                }
+    // create the connection
+    const connection = await mysql.createConnection({host:'localhost', user: 'castro',
+                                                    password:'jnfh(*89LJd267*&ldkj',database:'comparableproductsdb'});
+    // query database
+    const [rows, fields] = await connection.execute('select * from walmartproducts');
+    connection.end();
+    return rows
+    }

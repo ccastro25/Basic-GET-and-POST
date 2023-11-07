@@ -14,14 +14,14 @@
      <div  id="result">testing</div>
       <script>
 
-            let searchValue = document.getElementById('searchInput').value;
-            console.log(searchValue)
-         
+       
+         let resultsDiv = document.getElementById("result");
 
  async function getDBInfo() {
       try {
          const response = await fetch("http://localhost:8081/process_get");
-         const result   = await response.json();
+         const resultsDiv   = await response.json();
+         response.innerText = "Product: "+result[0].ProductName + "Description: "+result[0].Description+" Price: $"+result[0].Price;
          console.log("Success:", result);
       } catch (error) {
          console.error("Error:", error);

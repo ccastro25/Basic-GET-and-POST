@@ -16,8 +16,9 @@ app.get('/index.html', function(req,res){
 
 app.get('/process_get/', async function (req, res) {
     // Prepare output in JSON format
-     console.log(req)
-     response =  await queryMysql("milk");
+     console.log("this is req ")
+     console.log(req.query.serachTerm)
+     response =  await queryMysql(req.query.serachTerm);
      console.log("this sql response "+ response)
      res.end(JSON.stringify(response));
    

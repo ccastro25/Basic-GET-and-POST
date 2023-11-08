@@ -5,7 +5,7 @@
    </head>
    <body>
 
-      <form onsubmit="getDBInfo(this.value); return false"> 
+      <form onsubmit="getDBInfo(); return false"> 
        <input id ="searchInput" type = "search" name = "searchBar" class="serachB" placeholder="Enter product to compare" value="">  <br>
        
         <input type = "submit" value = "Submit">
@@ -18,8 +18,11 @@
          let resultsDiv = document.getElementById("result");
 
  async function getDBInfo(val) {
+   
       try {
-         let url ="http://localhost:8081/process_get/" + "?"  + new URLSearchParams("foo=1&bar=2")
+         let searchProduct = document.getElementById('searchInput').value
+         let url ="http://localhost:8081/process_get/" + "?"  + new URLSearchParams({serachTerm:searchProduct})
+         
          const response = await fetch(url);
          const result  = await response.json();
          resultsDiv.innerText = "Product: "+result[0].ProductName + "Description: "+result[0].Description+" Price: $"+result[0].Price;

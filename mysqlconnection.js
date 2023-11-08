@@ -5,8 +5,9 @@ module.exports = async function getSqlRows(searchTerm) {
     const connection = await mysql.createConnection({host:'localhost', user: 'castro',
                                                     password:'jnfh(*89LJd267*&ldkj',database:'comparableproductsdb'});
     // query database
-    let queryStatement = "select * from walmartproducts where productname = '%"+searchTerm+"%'"
+    let queryStatement = "select * from walmartproducts where productname like '%"+searchTerm+"%'"
     const [rows, fields] = await connection.execute(queryStatement);
+                                                   // select * from walmartproducts where productname like "%milk%"
     console.log("these are the rows "+rows)
     connection.end();
     return rows

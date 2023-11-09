@@ -16,10 +16,7 @@ app.get('/index.html', function(req,res){
 
 app.get('/process_get/', async function (req, res) {
     // Prepare output in JSON format
-     console.log("this is req ")
-     console.log(req.query.serachTerm)
      response =  await queryMysql(req.query.serachTerm);
-     console.log("this sql response "+ response)
      res.end(JSON.stringify(response));
    
  })
@@ -27,6 +24,5 @@ app.get('/process_get/', async function (req, res) {
 let server = app.listen(8081, function () {
    let host = server.address().address
    let port = server.address().port
-   
    console.log("Example app listening at http://%s:%s", host, port)
 })

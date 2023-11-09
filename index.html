@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
    <head>
-      
+      <link rel="stylesheet" href="searchpage.css">
    </head>
    <body>
-
-      <form onsubmit="getDBInfo(); return false"> 
-       <input id ="searchInput" type = "search" name = "searchBar" class="serachB" placeholder="Enter product to compare" value="">  <br>
-       
-        <input type = "submit" value = "Submit">
-      </form>
-      
-     <div  id="result">testing</div>
+      <div class="wrapper">
+         <div class="aside-1 aside">0</div>
+         <form onsubmit="getDBInfo(); return false" class="main"> 
+         
+         <input id ="searchInput" type = "search" name = "searchBar" class="serachB" placeholder="Enter product to compare" value="">  <br>
+         
+         <input type = "submit" value = "Submit">
+         </form>
+         <div class="aside-2 aside">0</div>
+      <div  id="result" class="footer">testing</div>
+     
+   </div>
       <script>
 
        

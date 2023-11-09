@@ -7,3 +7,6 @@ https://www.npmjs.com/package/mysql
 install mysql2 instead of mysql
 The link below explains the issue with using mysql
 https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server/56509065#56509065
+
+using link as css reference
+https://codepen.io/chriscoyier/pen/vWEMWw

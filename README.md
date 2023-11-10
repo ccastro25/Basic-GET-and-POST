@@ -10,3 +10,6 @@ https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-a
 
 using link as css reference
 https://codepen.io/chriscoyier/pen/vWEMWw
+
+creating table from json results
+https://forum.freecodecamp.org/t/looping-through-json-data-to-populate-a-table/297467

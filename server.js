@@ -7,12 +7,7 @@ const bodyParser = require('body-parser');
 // Create application/x-www-form-urlencoded parser
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.use(express.static('public'))
-app.get('/index.html', function(req,res){
 
-    console.log("testing form node") 
-    //res.sendFile(__dirname + "/" +"index.html")
-})
 
 app.get('/process_get/', async function (req, res) {
     // Prepare output in JSON format

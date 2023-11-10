@@ -1,5 +1,4 @@
 {
-  "proxy":"file:///Users/caonabocastro/Desktop/basicRouting/BasicGetAndPost/index.html?searchBar=being+",
   "dependencies": {
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",

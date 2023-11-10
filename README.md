@@ -12,4 +12,4 @@ using link as css reference
 https://codepen.io/chriscoyier/pen/vWEMWw
 
 creating table from json results
-https://forum.freecodecamp.org/t/looping-through-json-data-to-populate-a-table/297467
+https://www.tutorialspoint.com/how-to-convert-json-data-to-a-html-table-using-javascript-jquery

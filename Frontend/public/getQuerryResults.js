@@ -22,8 +22,13 @@
 
      
        function convert(jsonData) {
-         
          let container = document.getElementById("table");
+         if(container.childNodes.length ==1)
+            {
+               
+               container.removeChild(container.firstElementChild)
+            }
+        
          
          // Create the table element
          let table = document.createElement("table");

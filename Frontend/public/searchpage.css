@@ -9,28 +9,7 @@
     padding: 10px;
     flex: 1 100%;
   }
-  
-  .header {
-   /* background: tomato;*/
-  }
-  
-  .footer {
-  /*  background: lightgreen;*/
-  }
-  
-  .main {
-    text-align: center;
-  /*  background: deepskyblue;*/
-  }
-  
-  .aside-1 {
-   /* background: gold;*/
-  }
-  
-  .aside-2 {
-  /*  background: hotpink;*/
-  }
-  
+
   @media all and (min-width: 600px) {
     .aside { flex: 1 0 0; }
   }

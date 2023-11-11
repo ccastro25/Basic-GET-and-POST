@@ -4,17 +4,14 @@
       async function getDBInfo() {
            
               try {
-               let resultsDiv = document.getElementById("table");
-             
+               
                  let searchProduct = document.getElementById('searchInput').value
                  let url ="http://localhost:8081/process_get/" + "?"  + new URLSearchParams({serachTerm:searchProduct})
                  
                  const response = await fetch(url);
                  const result  = await response.json();
                  convert(result)
-                 console.log("Success:", result);
-                // resultsDiv.innerText = "Product: "+result[0].ProductName + "Description: "+result[0].Description+" Price: $"+result[0].Price;
-                 
+             
               } catch (error) {
                  console.error("Error:", error);
               }

@@ -2,7 +2,7 @@ post and get portion can be found at
 https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
 
 mysql connection can be found at 
-https://www.npmjs.com/package/mysql
+https://www.npmjs.com/package/mysql2
 
 install mysql2 instead of mysql
 The link below explains the issue with using mysql

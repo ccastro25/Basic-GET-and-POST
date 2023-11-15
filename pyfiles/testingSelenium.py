@@ -11,7 +11,7 @@ browser.get("https://www.walmart.com/search?q=Milk&affinityOverride=store_led&fa
 
 soup = BeautifulSoup(browser.page_source)
 prods = soup.find_all("div",class_='mb0')
-today = datetime.now().date()
+
 
 
 
@@ -20,7 +20,11 @@ products = {}
 for p_count , value in  enumerate(prods):
     span = value.find_all('span',class_="w_iUH7")
     if len(span)>1: 
-     d[p_count] =[]    
+     products[p_count] =[today]    
      for count , value in  enumerate(span):
-        d[p_count].append(value.text)
+        if count <=1:
+            if count==1:
+              products[p_count].insert(count,value.text.split("price $")[1])
+            else:
+                 products[p_count].insert(count,value.text)
  

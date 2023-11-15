@@ -24,4 +24,7 @@ https://www.tutorialspoint.com/how-to-convert-json-data-to-a-html-table-using-ja
     ]
     stmt = "INSERT INTO employees (first_name, hire_date) VALUES (%s, %s)"
     cursor.executemany(stmt, data)
-'''
+sample_list = ['Compile', 'With', 'Favtutor']
+
+#convert list into tuple
+tuple1 = tuple(sample_list)

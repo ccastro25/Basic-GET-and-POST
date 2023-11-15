@@ -12,9 +12,6 @@ browser.get("https://www.walmart.com/search?q=Milk&affinityOverride=store_led&fa
 soup = BeautifulSoup(browser.page_source)
 prods = soup.find_all("div",class_='mb0')
 
-
-
-
 products = {}
 
 for p_count , value in  enumerate(prods):
@@ -27,4 +24,9 @@ for p_count , value in  enumerate(prods):
               products[p_count].insert(count,value.text.split("price $")[1])
             else:
                  products[p_count].insert(count,value.text)
- 
+
+seq_of_params =[]
+for key, value in  products.items:
+    seq_of_params.append(tuple(value))
+
+insert_data(seq_of_params):

@@ -30,4 +30,4 @@ seq_of_params =[]
 for items in  products:
     seq_of_params.append(tuple(items))
 print(seq_of_params)
-#insert_data(seq_of_params)
+insert_data(seq_of_params)

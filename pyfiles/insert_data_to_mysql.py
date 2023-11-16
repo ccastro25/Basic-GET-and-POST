@@ -5,12 +5,10 @@ def insert_data(seq_of_params):
     cnx = mysql.connector.connect(user='castro', password ='jnfh(*89LJd267*&ldkj',database='comparableproductsdb')
     cursor = cnx.cursor()
 
-    add_products = { "INSERT INTO walmartpoducts"
-                    "(product_name, price, date)"
-                    "VALUES(%(product_name)s,%(price)s,%(date)s)"
-    }
-    data_products =(product_name,price,today)
-    cursor.execute(add_products,data_products)
+    add_products =  "INSERT INTO walmartproducts(product_name, price, the_date) VALUES(%s,%s,%s)"
+    
+   
+    cursor.executemany(add_products,seq_of_params)
 
     cnx.commit()
 

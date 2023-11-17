@@ -39,23 +39,23 @@ grocery_list =[
                 'Chocolate', 
               ]
 def get_products(item):
-browser.get("https://www.walmart.com/search?q=milk&affinityOverride=store_led&facet=fulfillment_method%3APickup")#.format(item
-soup = BeautifulSoup(browser.page_source)
-#just use soup.find_all('span',class_='w_iUH7') , just get spans. but will have to refactor loops 
-prods = soup.find_all('span',class_="w_iUH7")
-print(item)
-products = []
-span_count=0
-for p_count , value in  enumerate(prods):
-    if p_count >1 and not 'reviews' in value.text:
-      print(value.text) 
-      if 'price' in value.text:
-        products[span_count].insert(1,value.text.split("price $")[1])
-        span_count +=1
-      else:
-        print(span_count)
-        products.append([today])
-        products[span_count].insert(0,value.text)
+    browser.get("https://www.walmart.com/search?q=milk&affinityOverride=store_led&facet=fulfillment_method%3APickup")#.format(item
+    soup = BeautifulSoup(browser.page_source)
+    #just use soup.find_all('span',class_='w_iUH7') , just get spans. but will have to refactor loops 
+    prods = soup.find_all('span',class_="w_iUH7")
+    print(item)
+    products = []
+    span_count=0
+    for p_count , value in  enumerate(prods):
+        if p_count >1 and not 'reviews' in value.text:
+          print(value.text) 
+          if 'price' in value.text:
+            products[span_count].insert(1,value.text.split("price $")[1])
+            span_count +=1
+          else:
+            print(span_count)
+            products.append([today])
+            products[span_count].insert(0,value.text)
 
 
 final_list = []

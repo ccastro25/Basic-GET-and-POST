@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 #python
- pyfiles/__pycache__/*
+**/__pycache__/

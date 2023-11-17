@@ -8,8 +8,7 @@ import time
 from datetime import  datetime
    
 today = datetime.now().date()
-options = webdriver.SafariOptions()
-browser = webdriver.Safari(options=options)
+
 #eggs has to be searched as egg. some items have egg 
 grocery_list =[
                 'Egg',
@@ -43,9 +42,11 @@ grocery_list =[
                 'Chocolate', 
               ]
 def get_products(item):
-    browser.get("https://www.walmart.com/search?q={0}".format(item))#
-    time.sleep(15)
-    soup = BeautifulSoup(browser.page_source)
+    options = webdriver.SafariOptions()
+    driver = webdriver.Safari(options=options)
+    driver.get("https://www.walmart.com/search?q={0}".format(item))#
+    time.sleep(1)
+    soup = BeautifulSoup(driver.page_source)
 
     prods = soup.find_all('span',class_="w_iUH7")
     products = []
@@ -67,6 +68,7 @@ def get_products(item):
           products.append([today]) 
           print(value.text)
           products[span_count].insert(0,value.text)
+    driver.quit()
     print(products)
     return products
 
@@ -75,6 +77,7 @@ def get_products(item):
 final_list = []
 for item in grocery_list:
     final_list.extend( get_products(item))
+   
 
 list_of_tupples =[]
 for items in  products:

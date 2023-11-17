@@ -45,7 +45,7 @@ def get_products(item):
     options = webdriver.SafariOptions()
     driver = webdriver.Safari(options=options)
     driver.get("https://www.walmart.com/search?q={0}".format(item))#
-    time.sleep(1)
+    time.sleep(10)
     soup = BeautifulSoup(driver.page_source)
 
     prods = soup.find_all('span',class_="w_iUH7")
@@ -68,6 +68,12 @@ def get_products(item):
           products.append([today]) 
           print(value.text)
           products[span_count].insert(0,value.text)
+          
+    inpt = driver.find_element(By.CLASS_NAME,'search-bar')
+    inpt.send_keys('sugar')
+    inpt.send_keys(Keys.ENTER)
+    time.sleep(10)
+    print(products)
     driver.quit()
     print(products)
     return products
@@ -77,6 +83,7 @@ def get_products(item):
 final_list = []
 for item in grocery_list:
     final_list.extend( get_products(item))
+    time.sleep(50)
    
 
 list_of_tupples =[]

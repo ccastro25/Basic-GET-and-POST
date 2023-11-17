@@ -4,13 +4,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
-
+import time
 from datetime import  datetime
    
 today = datetime.now().date()
-browser = webdriver.Safari()
+options = webdriver.SafariOptions()
+browser = webdriver.Safari(options=options)
+#eggs has to be searched as egg. some items have egg 
 grocery_list =[
-                'Eggs',
+                'Egg',
                 'Milk',
                 'Bread',
                 'Bacon',
@@ -41,20 +43,34 @@ grocery_list =[
                 'Chocolate', 
               ]
 def get_products(item):
-browser.get("https://www.walmart.com/search?q=milk&affinityOverride=store_led&facet=fulfillment_method%3APickup")#.format(item
-soup = BeautifulSoup(browser.page_source)
-prods = soup.find_all('span',class_="w_iUH7")
+    browser.get("https://www.walmart.com/search?q={0}".format(item))#
+    time.sleep(15)
+    soup = BeautifulSoup(browser.page_source)
 
-products = []
-span_count=0
-for p_count , value in  enumerate(prods):
-  if p_count >1 and not 'reviews' in value.text and len(value.text)>0:
-    if 'price' in value.text:
-      products[span_count].insert(1,value.text.split("price $")[1])
-      span_count +=1
-    else:
-      products.append([today])
-      products[span_count].insert(0,value.text)
+    prods = soup.find_all('span',class_="w_iUH7")
+    products = []
+    span_count=0
+    for p_count , value in  enumerate(prods):
+      
+      if  item.lower() in value.text.lower() or 'price' in value.text :
+        
+        if 'price' in value.text:
+          print('price')
+          print(span_count)
+          print(value.next)
+          products[span_count].insert(1,value.text)#
+          span_count +=1
+        else:
+          print('name')
+          print(span_count)
+          print(value.text)
+          products.append([today]) 
+          print(value.text)
+          products[span_count].insert(0,value.text)
+    print(products)
+    return products
+
+
 
 final_list = []
 for item in grocery_list:
@@ -64,4 +80,6 @@ list_of_tupples =[]
 for items in  products:
     list_of_tupples.append(tuple(items))
 
-insert_data(list_of_tupples)
+print(final_list)
+
+#insert_data(list_of_tupples)

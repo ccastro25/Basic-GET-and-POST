@@ -7,7 +7,6 @@ from datetime import  datetime
    
 today = datetime.now().date()
 browser = webdriver.Safari()
-
 grocery_list =[
                 'Eggs',
                 'Milk',
@@ -58,8 +57,6 @@ for p_count , value in  enumerate(prods):
         products.append([today])
         products[span_count].insert(0,value.text)
 
-              
-print( products)
 
 final_list = []
 for item in grocery_list:

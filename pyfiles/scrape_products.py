@@ -1,8 +1,10 @@
-rom selenium import webdriver
+
+from insert_data_to_mysql import insert_data
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
-from insert_data_to_mysql import insert_data
+
 from datetime import  datetime
    
 today = datetime.now().date()
@@ -39,24 +41,20 @@ grocery_list =[
                 'Chocolate', 
               ]
 def get_products(item):
-    browser.get("https://www.walmart.com/search?q=milk&affinityOverride=store_led&facet=fulfillment_method%3APickup")#.format(item
-    soup = BeautifulSoup(browser.page_source)
-    #just use soup.find_all('span',class_='w_iUH7') , just get spans. but will have to refactor loops 
-    prods = soup.find_all('span',class_="w_iUH7")
-    print(item)
-    products = []
-    span_count=0
-    for p_count , value in  enumerate(prods):
-        if p_count >1 and not 'reviews' in value.text:
-          print(value.text) 
-          if 'price' in value.text:
-            products[span_count].insert(1,value.text.split("price $")[1])
-            span_count +=1
-          else:
-            print(span_count)
-            products.append([today])
-            products[span_count].insert(0,value.text)
+browser.get("https://www.walmart.com/search?q=milk&affinityOverride=store_led&facet=fulfillment_method%3APickup")#.format(item
+soup = BeautifulSoup(browser.page_source)
+prods = soup.find_all('span',class_="w_iUH7")
 
+products = []
+span_count=0
+for p_count , value in  enumerate(prods):
+  if p_count >1 and not 'reviews' in value.text and len(value.text)>0:
+    if 'price' in value.text:
+      products[span_count].insert(1,value.text.split("price $")[1])
+      span_count +=1
+    else:
+      products.append([today])
+      products[span_count].insert(0,value.text)
 
 final_list = []
 for item in grocery_list:

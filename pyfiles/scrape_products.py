@@ -44,47 +44,41 @@ grocery_list =[
               ]
 def get_products(item):
 
-lat_and_lon = geocoder.ip('me')
-store_location = lat_and_lon['city']+' Store'
-driver = webdriver.Safari()
-driver.get("https://www.walmart.com/search?q=bread")#.format(item)
-#time.sleep(10)
-soup = BeautifulSoup(driver.page_source)
-print('current item: '+item)
-prods = soup.find_all('span',class_="w_iUH7")
-products = []
-span_count=0
-for p_count , value in  enumerate(prods):
-  
-  if  len(value.text)>0 and store_location not in value.text :
-    
-    if 'price' in value.text:
-      print('price')
-      print(span_count)
-      print(value.next)
-      products[span_count].insert(1,value.text)#
-      span_count +=1
-    else:
-      print('name')
-      print(span_count)
-      print(value.text)
-      products.append([today]) 
-      print(value.text)
-      products[span_count].insert(0,value.text)
-          
-    #inpt = driver.find_element(By.CLASS_NAME,'search-bar')
-    #inpt.send_keys('sugar')
-    #inpt.send_keys(Keys.ENTER)
-    time.sleep(10)
-    print(products)
+    lat_and_lon = geocoder.ip('me')
+    store_location = lat_and_lon.json['city']+' Store'
+    driver = webdriver.Safari()
+    driver.get("https://www.walmart.com/search?q={0}".format(item))
+    time.sleep(3)
+    soup = BeautifulSoup(driver.page_source)
+    print('current item: '+item)
+    prods = soup.find_all('span',class_="w_iUH7")
+    products = []
+    span_count=0
+    for p_count , value in  enumerate(prods):
+      
+      if  len(value.text)>0 and store_location not in value.text and 'reviews' not in value.text :
+        
+        if 'price' in value.text:
+          '''print('price')
+          print(span_count)
+          print(value.next)'''
+          products[span_count].insert(1,value.text)#
+          span_count +=1
+        else:
+          print('name')
+          print(span_count)
+          print(value.text)
+          products.append([today]) 
+          products[span_count].insert(0,value.text)
     driver.quit()
-    print(products)
+    print(products) 
     return products
 
 
 
 final_list = []
 for item in grocery_list:
+    print("current item: {0}".format(item))
     final_list.extend( get_products(item))
     #may 120
     time.sleep(20)
@@ -94,10 +88,10 @@ for item in grocery_list:
     time.sleep(20)
     print("waiting 3")
     time.sleep(20)
-    print("waiting 4")
+    '''print("waiting 4")
     time.sleep(20)
     print("waiting 5")
-    time.sleep(20)
+    time.sleep(20)'''
     print("done")
 
 list_of_tupples =[]

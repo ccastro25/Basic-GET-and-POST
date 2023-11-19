@@ -44,37 +44,40 @@ grocery_list =[
               ]
 def get_products(item):
 
-    lat_and_lon = geocoder.ip('me')
-    store_location = lat_and_lon.json['city']+' Store'
-    driver = webdriver.Safari()
-    driver.get("https://www.walmart.com/search?q={0}".format(item))
-    time.sleep(3)
-    soup = BeautifulSoup(driver.page_source)
-    print('current item: '+item)
-    prods = soup.find_all('span',class_="w_iUH7")
-    products = []
-    span_count=0
-    for p_count , value in  enumerate(prods):
-      
-      if  len(value.text)>0 and store_location not in value.text and 'reviews' not in value.text :
-        
-        if 'price' in value.text:
-          '''print('price')
-          print(span_count)
-          print(value.next)'''
-          products[span_count].insert(1,value.text)#
-          span_count +=1
-        else:
-          print('name')
-          print(span_count)
-          print(value.text)
-          products.append([today]) 
-          products[span_count].insert(0,value.text)
-    driver.quit()
-    print(products) 
-    return products
+lat_and_lon = geocoder.ip('me')
+store_location = lat_and_lon.json['city']+' Store'
+driver = webdriver.Safari()
+# driver.get("https://www.walmart.com/search?q={0}".format(item))
+driver.get("https://www.walmart.com/search?q=Bacon")
+time.sleep(3)
+soup = BeautifulSoup(driver.page_source)
+print('current item: '+item)
+prods = soup.find_all('span',class_="w_iUH7")
+products = []
+span_count=0
+for p_count , value in  enumerate(prods):
+  
+  if  len(value.text)>0 and store_location not in value.text and 'reviews' not in value.text :
+    
+    if 'price' in value.text:
+      '''print('price')
+      print(span_count)
+      print(value.next)'''
+      products[span_count].insert(1,value.text)#
+      span_count +=1
+    else:
+      print('name')
+      print(span_count)
+      print(value.text)
+      products.append([today]) 
+      products[span_count].insert(0,value.text)
+driver.quit()
+print(products) 
+return products
 
-
+# better way to targe titles and prices 
+titles = soup.find_all(attrs={"data-automation-id":"product-title"})
+prices =soup.find_all(attrs={"data-automation-id":"product-price"})
 
 final_list = []
 for item in grocery_list:

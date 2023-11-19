@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import time
 from datetime import  datetime
-import geocoder
+
    
 today = datetime.now().date()
 
@@ -23,8 +23,8 @@ grocery_list =[
                 'Ham', 
                 'Cheese',
                 'Yogurt', 
-                'Platano',
-                'Frozen+pizza'
+                'Banana',
+                'Frozen+pizza',
                 'Grapes',
                 'Strawberry',
                 'Blueberry', 
@@ -43,10 +43,10 @@ grocery_list =[
               ]
 def get_products(item):
 
-    lat_and_lon = geocoder.ip('me')
-    store_location = lat_and_lon.json['city']+' Store'
+
     driver = webdriver.Safari()
     driver.get("https://www.walmart.com/search?q={0}".format(item))
+    #driver.get("https://www.walmart.com/search?q=Rasberry")
     time.sleep(2)
     soup = BeautifulSoup(driver.page_source)
     titles = soup.find_all(attrs={"data-automation-id":"product-title"})
@@ -56,6 +56,7 @@ def get_products(item):
         price = prices[i]
         value =price.find('span',class_='w_iUH7').text.split('$')
         products.append((titles[i].text,value[len(value)-1],today))
+    print(products)
     driver.quit()
     return products
 
@@ -64,7 +65,7 @@ final_list = []
 for item in grocery_list:
     print("current item: {0}".format(item))
     final_list.extend( get_products(item))
-    #may 120
+    print("starting")
     time.sleep(20)
     print("waiting 1 ") 
     time.sleep(20)

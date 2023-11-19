@@ -6,9 +6,10 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import time
 from datetime import  datetime
+import geocoder
    
 today = datetime.now().date()
-
+#ls or oz 
 #eggs has to be searched as egg. some items have egg 
 grocery_list =[
                 'Egg',
@@ -42,36 +43,38 @@ grocery_list =[
                 'Chocolate', 
               ]
 def get_products(item):
-    options = webdriver.SafariOptions()
-    driver = webdriver.Safari(options=options)
-    driver.get("https://www.walmart.com/search?q={0}".format(item))#
-    time.sleep(10)
-    soup = BeautifulSoup(driver.page_source)
 
-    prods = soup.find_all('span',class_="w_iUH7")
-    products = []
-    span_count=0
-    for p_count , value in  enumerate(prods):
-      
-      if  item.lower() in value.text.lower() or 'price' in value.text :
-        
-        if 'price' in value.text:
-          print('price')
-          print(span_count)
-          print(value.next)
-          products[span_count].insert(1,value.text)#
-          span_count +=1
-        else:
-          print('name')
-          print(span_count)
-          print(value.text)
-          products.append([today]) 
-          print(value.text)
-          products[span_count].insert(0,value.text)
+lat_and_lon = geocoder.ip('me')
+store_location = lat_and_lon['city']+' Store'
+driver = webdriver.Safari()
+driver.get("https://www.walmart.com/search?q=bread")#.format(item)
+#time.sleep(10)
+soup = BeautifulSoup(driver.page_source)
+print('current item: '+item)
+prods = soup.find_all('span',class_="w_iUH7")
+products = []
+span_count=0
+for p_count , value in  enumerate(prods):
+  
+  if  len(value.text)>0 and store_location not in value.text :
+    
+    if 'price' in value.text:
+      print('price')
+      print(span_count)
+      print(value.next)
+      products[span_count].insert(1,value.text)#
+      span_count +=1
+    else:
+      print('name')
+      print(span_count)
+      print(value.text)
+      products.append([today]) 
+      print(value.text)
+      products[span_count].insert(0,value.text)
           
-    inpt = driver.find_element(By.CLASS_NAME,'search-bar')
-    inpt.send_keys('sugar')
-    inpt.send_keys(Keys.ENTER)
+    #inpt = driver.find_element(By.CLASS_NAME,'search-bar')
+    #inpt.send_keys('sugar')
+    #inpt.send_keys(Keys.ENTER)
     time.sleep(10)
     print(products)
     driver.quit()
@@ -83,8 +86,19 @@ def get_products(item):
 final_list = []
 for item in grocery_list:
     final_list.extend( get_products(item))
-    time.sleep(50)
-   
+    #may 120
+    time.sleep(20)
+    print("waiting 1 ") 
+    time.sleep(20)
+    print("waiting 2")
+    time.sleep(20)
+    print("waiting 3")
+    time.sleep(20)
+    print("waiting 4")
+    time.sleep(20)
+    print("waiting 5")
+    time.sleep(20)
+    print("done")
 
 list_of_tupples =[]
 for items in  products:

@@ -10,7 +10,7 @@ from datetime import  datetime
    
 today = datetime.now().date()
 
-grocery_list =[
+grocery_list =[ 'Raspberry',
                 'Egg',
                 'Milk',
                 'Bread',
@@ -28,7 +28,7 @@ grocery_list =[
                 'Grapes',
                 'Strawberry',
                 'Blueberry', 
-                'Raspberry',
+               
                 'Lettuce', 
                 'Tomatoes',
                 'Onion',
@@ -52,10 +52,15 @@ def get_products(item):
     titles = soup.find_all(attrs={"data-automation-id":"product-title"})
     prices =soup.find_all(attrs={"data-automation-id":"product-price"})
     products = []
+
     for i, v in enumerate(titles):
+
         price = prices[i]
         value =price.find('span',class_='w_iUH7').text.split('$')
         products.append((titles[i].text,value[len(value)-1],today))
+        if ==30:
+          #Rabbery has issue when getting more than 36 products
+          break
     print(products)
     driver.quit()
     return products

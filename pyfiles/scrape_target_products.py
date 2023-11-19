@@ -16,7 +16,7 @@ def get_products(item):
 
 
     driver = webdriver.Safari()
-    #driver.get("https://www.walmart.com/search?q={0}".format(item))
+    #driver.get("https://www.target.com/s?searchTerm={0}".format(item))
     driver.get("https://www.target.com/s?searchTerm=milk")
     time.sleep(2)
     soup = BeautifulSoup(driver.page_source)

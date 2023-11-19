@@ -9,8 +9,7 @@ from datetime import  datetime
 import geocoder
    
 today = datetime.now().date()
-#ls or oz 
-#eggs has to be searched as egg. some items have egg 
+
 grocery_list =[
                 'Egg',
                 'Milk',
@@ -44,30 +43,22 @@ grocery_list =[
               ]
 def get_products(item):
 
-lat_and_lon = geocoder.ip('me')
-store_location = lat_and_lon.json['city']+' Store'
-driver = webdriver.Safari()
-# driver.get("https://www.walmart.com/search?q={0}".format(item))
-driver.get("https://www.walmart.com/search?q=Bacon")
-time.sleep(3)
-soup = BeautifulSoup(driver.page_source)
-# better way to targe titles and prices 
-titles = soup.find_all(attrs={"data-automation-id":"product-title"})
-prices =soup.find_all(attrs={"data-automation-id":"product-price"})
-products = []
-for i, v in enumerate(titles):
-    price = prices[i].text.split('$')
-    filtered_price = price[len(price)-1]
-    products.append((titles[i].text,prices[i].text,today))
-driver.quit()
-print(products) 
-return products
+    lat_and_lon = geocoder.ip('me')
+    store_location = lat_and_lon.json['city']+' Store'
+    driver = webdriver.Safari()
+    driver.get("https://www.walmart.com/search?q={0}".format(item))
+    time.sleep(2)
+    soup = BeautifulSoup(driver.page_source)
+    titles = soup.find_all(attrs={"data-automation-id":"product-title"})
+    prices =soup.find_all(attrs={"data-automation-id":"product-price"})
+    products = []
+    for i, v in enumerate(titles):
+        price = prices[i]
+        value =price.find('span',class_='w_iUH7').text.split('$')
+        products.append((titles[i].text,value[len(value)-1],today))
+    driver.quit()
+    return products
 
-
-
-
-price = split('$')
-filtered_price = price[len(price)-1]
 
 final_list = []
 for item in grocery_list:
@@ -81,16 +72,8 @@ for item in grocery_list:
     time.sleep(20)
     print("waiting 3")
     time.sleep(20)
-    '''print("waiting 4")
-    time.sleep(20)
-    print("waiting 5")
-    time.sleep(20)'''
     print("done")
-
-list_of_tupples =[]
-for items in  products:
-    list_of_tupples.append(tuple(items))
 
 print(final_list)
 
-#insert_data(list_of_tupples)
+insert_data(list_of_tupples)

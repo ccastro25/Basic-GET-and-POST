@@ -1,15 +1,10 @@
-'''data-testid="00093966009989-ProductNameTestId"
-data-testid="00742365264351-ProductNameTestId"
-data-testid="productCardPricing-div-testId"
-'''
-class="ProductCardNameWrapper--g2y3vm boGWcY"
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import time
 from datetime import  datetime
-
+import re
    
 today = datetime.now().date()
 
@@ -46,16 +41,14 @@ grocery_list =[ 'Raspberry',
               ]
 def get_products(item):
 
-
+pattern = re.compile(r'^\d+-ProductNameTestId$')
 driver = webdriver.Safari()
 driver.get("https://www.shoprite.com/sm/pickup/rsid/3000/results?q=milk")
-
 soup = BeautifulSoup(driver.page_source)
-title = soup.find_all('div',class_="ProductCardNameWrapper--g2y3vm boGWcY")
-price =soup.find_all('div',attrs={'data-testid':"productCardPricing-div-testId"})
-for p in price:
-     print(p.text)
-products = []
+title = soup.find_all(attrs ={"data-testid":pattern})
+price = soup.find_all('div',class_="ProductPrice--w5mr9b")
+for i,v  in enumerate(title):
+     print(sp[i].text.split('Open')[0])
 
 driver.quit()
 return products

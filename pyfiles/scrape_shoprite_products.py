@@ -5,8 +5,6 @@ from bs4 import BeautifulSoup
 import time
 from datetime import  datetime
 import re
-   
-today = datetime.now().date()
 
 grocery_list =[ 'Raspberry',
                 'Egg',
@@ -39,16 +37,21 @@ grocery_list =[ 'Raspberry',
                 'Lasagna+noodles', 
                 'Chocolate', 
               ]
+today = datetime.now().date()
 def get_products(item):
 
-pattern = re.compile(r'^\d+-ProductNameTestId$')
-driver = webdriver.Safari()
-driver.get("https://www.shoprite.com/sm/pickup/rsid/3000/results?q=milk")
-soup = BeautifulSoup(driver.page_source)
-title = soup.find_all(attrs ={"data-testid":pattern})
-price = soup.find_all('div',class_="ProductPrice--w5mr9b")
-for i,v  in enumerate(title):
-     print(sp[i].text.split('Open')[0])
+     pattern = re.compile(r'^\d+-ProductNameTestId$')
+     driver = webdriver.Safari()
+     driver.get("https://www.shoprite.com/sm/pickup/rsid/3000/results?q={0}".format(item))
+     soup = BeautifulSoup(driver.page_source)
+     title = soup.find_all(attrs ={"data-testid":pattern})
+     price = soup.find_all('div',class_="ProductPrice--w5mr9b")
+     products =[]
+     compare =''
+     for i,v  in enumerate(title):
+          if compare != title[i].text:
+               products.append((title[i].text.split("Open")[0],price[i].text, today))
+          compare = title[i].text
 
-driver.quit()
-return products
+     driver.quit()
+     return products

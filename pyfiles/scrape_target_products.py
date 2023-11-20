@@ -20,6 +20,7 @@ driver = webdriver.Safari()
 driver.get("https://www.target.com/s?searchTerm=milk")
 time.sleep(2)
 soup = BeautifulSoup(driver.page_source,'html.parser')
+#attrs does not seem to work , prices do not seem to appear , 
 titles = soup.find_all(attrs={"data-test":"product-title"})
 prices =soup.find_all(attrs={"data-test":"current-price"})
 products = []
@@ -31,6 +32,9 @@ for i, v in enumerate(titles):
 print(products)
 driver.quit()
 return products
+
+
+
 #possible option to get title
 class="styles__PriceStandardLineHeight-sc-b5yooy-0 kKRufV"
 des = soup.find_all(class_='styles__StyledLink-sc-vpsldm-0 eqjfDm')

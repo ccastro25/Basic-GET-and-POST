@@ -45,8 +45,7 @@ def get_products(item):
 
 
     driver = webdriver.Safari()
-    driver.get("https://www.walmart.com/search?q={0}".format(item))
-    #driver.get("https://www.walmart.com/search?q=Rasberry")
+    driver.get("https://www.walmart.com/search?q={0}".format(item)
     time.sleep(2)
     soup = BeautifulSoup(driver.page_source)
     titles = soup.find_all(attrs={"data-automation-id":"product-title"})
@@ -61,7 +60,7 @@ def get_products(item):
         if ==30:
           #Rabbery has issue when getting more than 36 products
           break
-    print(products)
+   
     driver.quit()
     return products
 
@@ -80,6 +79,6 @@ for item in grocery_list:
     time.sleep(20)
     print("done")
 
-print(final_list)
 
-insert_data(list_of_tupples)
+
+insert_data(final_list)

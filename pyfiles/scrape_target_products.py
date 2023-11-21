@@ -33,13 +33,6 @@ print(products)
 driver.quit()
 return products
 
-
-
-#possible option to get title
-class="styles__PriceStandardLineHeight-sc-b5yooy-0 kKRufV"
-des = soup.find_all(class_='styles__StyledLink-sc-vpsldm-0 eqjfDm')
-class="styles__ProductCardPriceAndPromoStyled-sc-j7z9dv-0 bQvAZT"
-
 #subcription based target api . 15 a month for hobbiest
 import requests
 import json

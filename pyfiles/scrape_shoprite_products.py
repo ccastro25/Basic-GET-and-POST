@@ -6,6 +6,8 @@ import time
 from datetime import  datetime
 import re
 
+#
+
 grocery_list =[ 'Raspberry',
                 'Egg',
                 'Milk',
@@ -38,11 +40,13 @@ grocery_list =[ 'Raspberry',
                 'Chocolate', 
               ]
 today = datetime.now().date()
+driver = webdriver.Chrome()
 def get_products(item):
 
      pattern = re.compile(r'^\d+-ProductNameTestId$')
-     driver = webdriver.Safari()
+     
      driver.get("https://www.shoprite.com/sm/pickup/rsid/3000/results?q={0}".format(item))
+     time.sleep(2)
      soup = BeautifulSoup(driver.page_source)
      title = soup.find_all(attrs ={"data-testid":pattern})
      price = soup.find_all('div',class_="ProductPrice--w5mr9b")
@@ -54,4 +58,8 @@ def get_products(item):
           compare = title[i].text
 
      driver.quit()
+     print('this is a sample')
+     print(products[3])
      return products
+
+get_products('milk')

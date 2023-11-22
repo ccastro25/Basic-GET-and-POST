@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import time
 from datetime import  datetime
 import re
-
+import pickle
 #
 
 grocery_list =[ 'Raspberry',
@@ -40,9 +40,9 @@ grocery_list =[ 'Raspberry',
                 'Chocolate', 
               ]
 today = datetime.now().date()
-driver = webdriver.Chrome()
-def get_products(item):
 
+def get_products(item):
+     driver = webdriver.Chrome()
      pattern = re.compile(r'^\d+-ProductNameTestId$')
      
      driver.get("https://www.shoprite.com/sm/pickup/rsid/3000/results?q={0}".format(item))
@@ -54,7 +54,7 @@ def get_products(item):
      compare =''
      for i,v  in enumerate(title):
           if compare != title[i].text:
-               products.append((title[i].text.split("Open")[0],price[i].text, today))
+               products.append((title[i].text.split("Open")[0],price[i].text, today,"ShopRite"))
           compare = title[i].text
 
      driver.quit()
@@ -62,4 +62,21 @@ def get_products(item):
      print(products[3])
      return products
 
-get_products('milk')
+final_list = []
+for item in grocery_list:
+    print("current item: {0}".format(item))
+    final_list.extend( get_products(item))
+    print("starting")
+    time.sleep(20)
+    print("waiting 1 ") 
+    time.sleep(20)
+    print("waiting 2")
+    time.sleep(20)
+    print("waiting 3")
+    time.sleep(20)
+    print("done")
+#save as pickle incase of error
+with open('shopriteproducts.pickle','wb') as f:
+     pickle.dump(final_list,f)
+
+#insert_data(final_list,"shopriteproducts")

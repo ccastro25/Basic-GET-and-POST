@@ -41,26 +41,26 @@ grocery_list =[ 'Raspberry',
 today = datetime.now().date()
 
 def get_products(item):
-driver = webdriver.Chrome()
+    driver = webdriver.Safari()
 
-driver.get("https://www.acmemarkets.com/shop/search-results.html?q=milk")
-time.sleep(2)
-soup = BeautifulSoup(driver.page_source)
-title = soup.find_all('a',attrs={'data-qa': 'prd-itm-pttl'})
-#price retrieves all values  
-price = soup.find_all('span',attrs={'data-qa':'prd-itm-prc'})
+    driver.get("https://www.acmemarkets.com/shop/search-results.html?q={0}".format(item))
+    print("this is the url: "+"https://www.acmemarkets.com/shop/search-results.html?q={0}".format(item) )
+    time.sleep(2)
+    soup = BeautifulSoup(driver.page_source)
+    title = soup.find_all('a',attrs={'data-qa': 'prd-itm-pttl'})
+    #price retrieves all values  
+    price = soup.find_all('span',attrs={'data-qa':'prd-itm-prc'})
 
-products =[]
-compare =''
+    products =[]
 
-for i,v  in enumerate(title):
-        products.append((title[i].text,price[i].text.split(' ')[2], today,"ACME"))
-    
+    for i,v  in enumerate(title):
+            products.append((title[i].text,price[i].text.split(' ')[2], today,"ACME"))
+        
 
-driver.quit()
-print('this is a sample')
-print(products)
-return products
+    driver.quit()
+    print('this is a sample')
+    print(products)
+    return products
 
 final_list = []
 for item in grocery_list:
@@ -76,7 +76,7 @@ for item in grocery_list:
     time.sleep(20)
     print("done")
 #save as pickle incase of error
-with open('shoprite_products.pickle','wb') as f:
+with open('acme_products.pickle','wb') as f:
      pickle.dump(final_list,f)
 
 insert_data(final_list,"acmeproducts")

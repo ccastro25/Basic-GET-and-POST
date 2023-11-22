@@ -10,7 +10,7 @@ from datetime import  datetime
 
    
 today = datetime.now().date()
-driver = webdriver.Safari()
+
 grocery_list =[ 'Raspberry',
                 'Egg',
                 'Milk',
@@ -43,7 +43,7 @@ grocery_list =[ 'Raspberry',
                 'Chocolate', 
               ]
 def get_products(item):
- 
+    driver = webdriver.Chrome()
     driver.get("https://www.walmart.com/search?q={0}".format(item))
     time.sleep(2)
     soup = BeautifulSoup(driver.page_source)
@@ -54,7 +54,7 @@ def get_products(item):
     for i, v in enumerate(prices):
         price = prices[i]
         value =price.find('span',class_='w_iUH7').text.split('$')
-        products.append((titles[i].text,value[len(value)-1],today))
+        products.append((titles[i].text,value[len(value)-1],today,"Walmart"))
         if i==30:
           #Rabbery has issue when getting more than 36 products
           #Bacon
@@ -81,9 +81,9 @@ for item in grocery_list:
 #save as pickle incase of error
 with open('walmart_products.pickle','wb') as f:
      pickle.dump(final_list,f)
-
-insert_data(final_list)
 ''' 
+insert_data(final_list,"walmartproducts")
+
 unpickle
 with open('walmar_products.pickle','rb) as f:
      data = pickle.load(f)

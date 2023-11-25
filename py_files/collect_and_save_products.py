@@ -7,7 +7,7 @@ def get_save_items(store_product,get_product):
 
     products = []
     for item in grocery_list:
-        print("current item: {0}".format(item))
+        print(f"current item: {item}")
         products.extend( get_product(item))
         print("starting")
         time.sleep(20)

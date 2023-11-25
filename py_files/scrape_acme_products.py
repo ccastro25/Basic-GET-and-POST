@@ -12,8 +12,8 @@ today = datetime.now().date()
 def get_acme_products(item):
     driver = webdriver.Safari()
 
-    driver.get("https://www.acmemarkets.com/shop/search-results.html?q={0}".format(item))
-    print("this is the url: "+"https://www.acmemarkets.com/shop/search-results.html?q={0}".format(item) )
+    driver.get(f"https://www.acmemarkets.com/shop/search-results.html?q={item}")
+    print(f"this is the url: "+"https://www.acmemarkets.com/shop/search-results.html?q={item}" )
     time.sleep(2)
     soup = BeautifulSoup(driver.page_source,'html.parser')
     title = soup.find_all('a',attrs={'data-qa': 'prd-itm-pttl'})

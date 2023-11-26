@@ -1,70 +1,51 @@
-#url https://www.riteaid.com/shop/catalogsearch/result/?q=milk&Category=Grocery&Category=Food
-# product name class="ra_prod_name"
-# price class="ra_final-price"
-driver.get("https://www.riteaid.com/shop/catalogsearch/result/?q=milk&Category=Grocery&Category={0}".format(item))
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from datetime import  datetime
+from bs4 import BeautifulSoup
+from collect_and_save_products import get_save_items
+from grocery_list import grocery_list
+import time 
+
+
+options = webdriver.SafariOptions()
+#options.add_argument('--headless')
+options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36')
+driver = webdriver.Safari(options=options)
+driver.get(f"https://www.riteaid.com/")
+
+today = datetime.now().date()
+
+def get_acme_products(item):
+       
 time.sleep(2)
-soup = BeautifulSoup(driver.page_source)
-name =soup.find_all('div',class_='ra_prod_name').
-price  =soup.find_all('span',class_='ra_final-price').
+inpu = driver.find_element(By.CLASS_NAME, "cx-header-menu__search-textbox")
 
-grocery_list =[ 'Raspberry',
-                'Egg',
-                'Milk',
-                'Bread',
-                'Bacon',
-                'Cooking+oil',
-                'Rice',
-                'Tuna',
-                'Steak',
-                'Chicken', 
-                'Ham', 
-                'Cheese',
-                'Yogurt', 
-                'Banana',
-                'Frozen+pizza',
-                'Grapes',
-                'Strawberry',
-                'Blueberry', 
-               
-                'Lettuce', 
-                'Tomatoes',
-                'Onion',
-                'Avocado',
-                'Cereals',
-                'Ice+cream',
-                'Cream+cheese', 
-                'Tomato+sauce',
-                'Spaghetti', 
-                'Lasagna+noodles', 
-                'Chocolate', 
-              ]
-def get_products(item):
-    driver = webdriver.Chrome()
-    driver.get("https://www.walmart.com/search?q={0}".format(item))
-    time.sleep(2)
-    soup = BeautifulSoup(driver.page_source)
-    titles = soup.find_all(attrs={"data-automation-id":"product-title"})
-    prices =soup.find_all(attrs={"data-automation-id":"product-price"})
-    products = []
-
-    for i, v in enumerate(prices):
-        price = prices[i]
-        value =price.find('span',class_='w_iUH7').text.split('$')
-        products.append((titles[i].text,value[len(value)-1],today,"Walmart"))
-        if i==30:
-          #Rabbery has issue when getting more than 36 products
-          #Bacon
-          break
-    print("this a sample of the products")
-    print(products[3]) 
-    driver.quit()
-    return products
+inpu.clear()
+inpu.send_keys(item)
+time.sleep(2)
+inpu.send_keys(Keys.RETURN)
+time.sleep(5)
+inpu = driver.find_element(By.CLASS_NAME,"myCheckbox_43617465676f727920466f6f64")
+inpu.click()
+soup = BeautifulSoup(driver.page_source,'html.parser')
+title =soup.find_all('div',class_='ra_prod_name')
+price  =soup.find_all('span',class_='ra_final-price')
 
 
-final_list = []
+products =[]
+for i,v  in enumerate(title):
+    products.append((title[i].text,price[i].text.split(' ')[2].replace('$', ''), today,"ACME"))
+
+print('this is a sample')
+print(products)
+return products
+
+
+products = []
 for item in grocery_list:
-    print("current item: {0}".format(item))
-    final_list.extend( get_products(item))
+    print(f"current item: {item}")
+    products.extend( get_acme_products(item))
     print("starting")
     time.sleep(20)
     print("waiting 1 ") 
@@ -74,6 +55,11 @@ for item in grocery_list:
     print("waiting 3")
     time.sleep(20)
     print("done")
-#save as pickle incase of error
-with open('walmart_products.pickle','wb') as f:
-     pickle.dump(final_list,f)
+driver.quit()
+
+with open('rite_aid.pickle','wb') as f:
+    pickle.dump(final_list,f) 
+insert_data(final_list,store_product)
+
+#get_save_items('acme_products',get_acme_products)
+

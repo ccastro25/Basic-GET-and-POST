@@ -6,11 +6,10 @@ from bs4 import BeautifulSoup
 from collect_and_save_products import get_save_items
 from grocery_list import grocery_list
 import time 
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 
 options = webdriver.ChromeOptions()
-#options.add_argument('--headless')
+options.add_argument('--headless')
 options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36')
 driver = webdriver.Chrome(options=options)
 driver.get(f"https://www.acmemarkets.com/")
@@ -56,7 +55,7 @@ for item in grocery_list:
     print("done")
 driver.quit()
 
-with open(f'{store_product}.pickle','wb') as f:
+with open('acme.pickle','wb') as f:
     pickle.dump(final_list,f) 
 insert_data(final_list,store_product)
 

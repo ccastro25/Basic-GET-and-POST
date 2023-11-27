@@ -1,4 +1,4 @@
-#https://www.target.com/s?searchTerm=milk&tref=typeahead%7Cterm%7Cmilk%7C%7C%7Chistory
+'''#https://www.target.com/s?searchTerm=milk&tref=typeahead%7Cterm%7Cmilk%7C%7C%7Chistory
 #parent : span data-test= "current-price" child span
 #a tag  data-test= "product-title"
 from insert_data_to_mysql import insert_data
@@ -49,3 +49,4 @@ api_result = requests.get('https://api.redcircleapi.com/request', params)
 
 # print the JSON response from RedCircle API
 print(json.dumps(api_result.json()))
+'''

@@ -43,7 +43,7 @@ grocery_list =[ 'Raspberry',
                 'Chocolate', 
               ]
 def get_products(item):
-    driver = webdriver.Chrome()
+    driver = webdriver.Safari()
     driver.get("https://www.walmart.com/search?q={0}".format(item))
     time.sleep(2)
     soup = BeautifulSoup(driver.page_source)
@@ -60,7 +60,7 @@ def get_products(item):
           #Bacon
           break
     print("this a sample of the products")
-    print(products[3]) 
+    # print(products[0]) 
     driver.quit()
     return products
 

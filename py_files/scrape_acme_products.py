@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from collect_and_save_products import get_save_items
 from grocery_list import grocery_list
 import time 
-
+import pickle
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -56,7 +56,7 @@ for item in grocery_list:
 driver.quit()
 
 with open('acme.pickle','wb') as f:
-    pickle.dump(final_list,f) 
-insert_data(final_list,store_product)
+    pickle.dump(products,f) 
+#insert_data(final_list,store_product)
 
 #get_save_items('acme_products',get_acme_products)

@@ -8,7 +8,7 @@ import time
 import pickle
 from datetime import  datetime
 
-   
+ 
 today = datetime.now().date()
 
 grocery_list =[ 'Raspberry',
@@ -80,11 +80,12 @@ for item in grocery_list:
     print("done")
 #save as pickle incase of error
 with open('walmart_products.pickle','wb') as f:
-     pickle.dump(final_list,f)
-''' 
-insert_data(final_list,"walmartproducts")
+     pickle.dump(final_list,f) 
 
-unpickle
-with open('walmart_products.pickle','rb) as f:
+
+
+
+with open('../pickles/walmart_products.pickle','rb') as f:
      data = pickle.load(f)
-'''
+     
+     insert_data(data,"walmartproducts")

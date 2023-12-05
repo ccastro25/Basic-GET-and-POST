@@ -1,3 +1,4 @@
+from insert_data_to_mysql import insert_data
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -10,7 +11,7 @@ import pickle
 
 
 options = webdriver.ChromeOptions()
-#options.add_argument('--headless')
+options.add_argument('--headless')
 options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36')
 driver = webdriver.Chrome(options=options)
 
@@ -50,8 +51,11 @@ for item in grocery_list:
 driver.quit()
 
 with open('rite_aid.pickle','wb') as f:
-    pickle.dump(products,f) 
-#insert_data(final_list,store_product)
+    pickle.dump(products,f)
 
-#get_save_items('acme_products',get_acme_products)
+with open('../pickles/rite_aid.pickle','rb') as f:
+     data = pickle.load(f)
+     
+     insert_data(data,"riteaidproducts")
+
 

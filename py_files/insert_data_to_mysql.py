@@ -6,7 +6,7 @@ def insert_data(seq_of_params,table):
     cnx = mysql.connector.connect(user='castro', password ='jnfh(*89LJd267*&ldkj',database='comparableproductsdb')
     cursor = cnx.cursor()
     add_products =  "INSERT INTO "+table+"(product_name, price, the_date, store_name) VALUES(%s,%s,%s,%s)"
- 
+    print("inserting")
     cursor.executemany(add_products,seq_of_params)
     cnx.commit()
     cursor.close()

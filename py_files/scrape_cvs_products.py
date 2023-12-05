@@ -1,3 +1,4 @@
+from insert_data_to_mysql import insert_data
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -6,6 +7,7 @@ from bs4 import BeautifulSoup
 import time
 import re
 import pickle  
+
 #class="css-901oao css-cens5h r-b0vftf r-1xaesmv r-ubezar r-majxgm r-29m4ib r-rjixqe r-1mnahxq r-fdjqy7 r-13qz1uu"
 options = webdriver.SafariOptions()
 options.add_argument('--headless')
@@ -80,5 +82,9 @@ driver.quit()
 
 with open('cvs.pickle','wb') as f:
     pickle.dump(products,f) 
-#insert_data(final_list,store_product)
+
+with open('../pickles/cvspickle','rb') as f:
+     data = pickle.load(f)
+     
+     insert_data(data,"cvsproducts")
 

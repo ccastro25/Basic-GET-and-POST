@@ -54,7 +54,7 @@ def get_products(item):
      compare =''
      for i,v  in enumerate(title):
           if compare != title[i].text:
-               products.append((title[i].text.split("Open")[0],price[i].text.replace('$', ''), today,"ShopRite"))
+               products.append((title[i].text.split("Open")[0],re.sub('[^0-9,.]','',price[i].text), today,"ShopRite"))
           compare = title[i].text
 
      driver.quit()

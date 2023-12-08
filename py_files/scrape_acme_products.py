@@ -7,6 +7,7 @@ from collect_and_save_products import get_save_items
 from grocery_list import grocery_list
 import time 
 import pickle
+import re
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -33,7 +34,7 @@ def get_acme_products(item):
 
     products =[]
     for i,v  in enumerate(title):
-        products.append((title[i].text,price[i].text.split(' ')[2].replace('$', ''), today,"ACME"))
+        products.append((title[i].textre.sub('[^0-9,.]','',price[i].text), today,"ACME"))
 
     print('this is a sample')
     print(products)

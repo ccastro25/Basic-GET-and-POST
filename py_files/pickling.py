@@ -3,7 +3,7 @@ from insert_data_to_mysql import insert_data
 
 files = ['acmeproducts','cvsproducts','riteaidproducts','shopriteproducts','walmartproducts']
 
-def pickle_dumps(filename):
+def pickle_dumps(filename,products):
     with open(filename,'wb') as f:
         pickle.dump(products,f)
 

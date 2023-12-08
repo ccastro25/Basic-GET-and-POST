@@ -1,14 +1,12 @@
-from insert_data_to_mysql import insert_data
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from datetime import  datetime
 from bs4 import BeautifulSoup
-from collect_and_save_products import get_save_items
 from grocery_list import grocery_list
 import time
 import pickle 
-
+mport re
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -18,7 +16,7 @@ driver = webdriver.Chrome(options=options)
 
 today = datetime.now().date()
 
-def get_acme_products(item):
+def get_product(item):
     driver.get(f"https://www.riteaid.com/shop/catalogsearch/result/?q={item}&Category=Food")    
     time.sleep(2)
                                 
@@ -34,21 +32,21 @@ def get_acme_products(item):
     print(products)
     return products
 
-
-products = []
-for item in grocery_list:
-    print(f"current item: {item}")
-    products.extend( get_acme_products(item))
-    print("starting")
-    time.sleep(20)
-    print("waiting 1 ") 
-    time.sleep(20)
-    print("waiting 2")
-    time.sleep(20)
-    print("waiting 3")
-    time.sleep(20)
-    print("done")
-driver.quit()
+def get_all_acme_products():
+    products = []
+    for item in grocery_list:
+        print(f"current item: {item}")
+        products.extend( get_product(item))
+        print("starting")
+        time.sleep(20)
+        print("waiting 1 ") 
+        time.sleep(20)
+        print("waiting 2")
+        time.sleep(20)
+        print("waiting 3")
+        time.sleep(20)
+        print("done")
+     driver.quit()
 
 
 

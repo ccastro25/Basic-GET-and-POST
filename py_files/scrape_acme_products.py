@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from datetime import  datetime
 from bs4 import BeautifulSoup
-from collect_and_save_products import get_save_items
 from grocery_list import grocery_list
 import time 
 import pickle
@@ -17,7 +16,7 @@ driver.get(f"https://www.acmemarkets.com/")
 
 today = datetime.now().date()
 
-def get_acme_products(item):
+def get_product(item):
        
     #driver.implicitly_wait(5)
     time.sleep(2)
@@ -34,26 +33,26 @@ def get_acme_products(item):
 
     products =[]
     for i,v  in enumerate(title):
-        products.append((title[i].textre.sub('[^0-9,.]','',price[i].text), today,"ACME"))
+        products.append((title[i].text,re.sub('[^0-9,.]','',price[i].text), today,"ACME"))
 
     print('this is a sample')
     print(products)
     return products
 
-
-products = []
-for item in grocery_list:
-    print(f"current item: {item}")
-    products.extend( get_acme_products(item))
-    print("starting")
-    time.sleep(20)
-    print("waiting 1 ") 
-    time.sleep(20)
-    print("waiting 2")
-    time.sleep(20)
-    print("waiting 3")
-    time.sleep(20)
-    print("done")
-driver.quit()
+def get_acme_products():
+    products = []
+    for item in grocery_list:
+        print(f"current item: {item}")
+        products.extend( get_acme_products(item))
+        print("starting")
+        time.sleep(20)
+        print("waiting 1 ") 
+        time.sleep(20)
+        print("waiting 2")
+        time.sleep(20)
+        print("waiting 3")
+        time.sleep(20)
+        print("done")
+    driver.quit()
 
 

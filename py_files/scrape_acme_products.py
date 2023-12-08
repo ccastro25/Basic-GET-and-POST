@@ -1,4 +1,3 @@
-from insert_data_to_mysql import insert_data
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -57,7 +56,3 @@ for item in grocery_list:
 driver.quit()
 
 
-with open('../pickles/acme.pickle','rb') as f:
-     data = pickle.load(f)
-     
-     insert_data(data,"acmeproducts")

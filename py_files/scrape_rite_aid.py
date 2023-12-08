@@ -50,12 +50,6 @@ for item in grocery_list:
     print("done")
 driver.quit()
 
-with open('rite_aid.pickle','wb') as f:
-    pickle.dump(products,f)
 
-with open('../pickles/rite_aid.pickle','rb') as f:
-     data = pickle.load(f)
-     
-     insert_data(data,"riteaidproducts")
 
 

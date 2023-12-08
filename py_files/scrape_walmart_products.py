@@ -78,14 +78,3 @@ for item in grocery_list:
     print("waiting 3")
     time.sleep(20)
     print("done")
-#save as pickle incase of error
-with open('walmart_products.pickle','wb') as f:
-     pickle.dump(final_list,f) 
-
-
-
-
-with open('../pickles/walmart_products.pickle','rb') as f:
-     data = pickle.load(f)
-     
-     insert_data(data,"walmartproducts")

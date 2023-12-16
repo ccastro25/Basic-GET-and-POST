@@ -41,7 +41,7 @@ def get_acme_products():
     products = []
     for item in grocery_list:
         print(f"current item: {item}")
-        products.extend( get_acme_products(item))
+        products.extend( get_product(item))
         print("starting")
         time.sleep(20)
         print("waiting 1 ") 

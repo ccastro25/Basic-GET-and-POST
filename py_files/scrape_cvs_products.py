@@ -8,11 +8,11 @@ import time
 import re
 import pickle  
 
-#class="css-901oao css-cens5h r-b0vftf r-1xaesmv r-ubezar r-majxgm r-29m4ib r-rjixqe r-1mnahxq r-fdjqy7 r-13qz1uu"
+
 options = webdriver.SafariOptions()
 options.add_argument('--headless')
 options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36')
-driver = webdriver.Safari(options=options
+driver = webdriver.Safari(options=options)
 today = datetime.now().date()
 
 def get_product(item):
@@ -26,11 +26,7 @@ def get_product(item):
     products =[]
     for i,v  in enumerate(title):
         products.append((title[i].text, re.sub('[^0-9,.]','',price[i].text), today, "CVS"))
-        
-
-    print('this is a sample')
-    print(products)
-    
+      
     return products
 
 def get_cvs_products():
@@ -48,7 +44,7 @@ def get_cvs_products():
         time.sleep(20)
         print("done")
     driver.quit()
-    
+    return products    
 
 
 

@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import time
 import pickle
+import re
 from datetime import  datetime
 
  
@@ -23,23 +24,23 @@ def get_product(item):
 
     for i, v in enumerate(prices):
         price = prices[i]
-        value =price.find('span',class_='w_iUH7').text.split('$')
+        re.sub('[^0-9,.]','',price.find('span',class_='w_iUH7').text)
+        value = re.sub('[^0-9,.]','',price.find('span',class_='w_iUH7').text)
         products.append((titles[i].text,value[len(value)-1],today,"Walmart"))
         if i==30:
           #Rabbery has issue when getting more than 36 products
           #Bacon
           break
-    print("this a sample of the products")
-    # print(products[0]) 
+
     
     return products
 
 
 def get_walmart_products():
-    final_list = []
+    products = []
     for item in grocery_list:
         print("current item: {0}".format(item))
-        final_list.extend( get_product(item))
+        products.extend( get_product(item))
         print("starting")
         time.sleep(20)
         print("waiting 1 ") 
@@ -49,4 +50,6 @@ def get_walmart_products():
         print("waiting 3")
         time.sleep(20)
         print("done")
+    
     driver.quit()
+    return products

@@ -26,16 +26,13 @@ def get_product(item):
                products.append((title[i].text.split("Open")[0],re.sub('[^0-9,.]','',price[i].text), today,"ShopRite"))
           compare = title[i].text
 
-     
-     print('this is a sample')
-     print(products[3])
      return products
 
 def get_shoprite_products():
-     final_list = []
+     products = []
      for item in grocery_list:
           print("current item: {0}".format(item))
-          final_list.extend( get_product(item))
+          products.extend( get_product(item))
           print("starting")
           time.sleep(20)
           print("waiting 1 ") 
@@ -46,3 +43,4 @@ def get_shoprite_products():
           time.sleep(20)
           print("done")
      driver.quit()
+     return products

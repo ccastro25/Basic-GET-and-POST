@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from grocery_list import grocery_list
 import time
 import pickle 
-mport re
+import re
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -28,11 +28,9 @@ def get_product(item):
     for i,v  in enumerate(title):
         products.append((title[i].text.strip(),price[i].text.replace('$', ''), today,"Rite-Aid"))
 
-    print('this is a sample')
-    print(products)
     return products
 
-def get_all_acme_products():
+def get_riteaid_products():
     products = []
     for item in grocery_list:
         print(f"current item: {item}")
@@ -46,8 +44,8 @@ def get_all_acme_products():
         print("waiting 3")
         time.sleep(20)
         print("done")
-     driver.quit()
-
+    driver.quit()
+    return products
 
 
 

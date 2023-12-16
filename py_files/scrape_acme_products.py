@@ -18,7 +18,6 @@ today = datetime.now().date()
 
 def get_product(item):
        
-    #driver.implicitly_wait(5)
     time.sleep(2)
     inpu = driver.find_element(By.TAG_NAME,"input")
     inpu.clear()
@@ -27,8 +26,7 @@ def get_product(item):
     inpu.send_keys(Keys.RETURN)
     time.sleep(5)
     soup = BeautifulSoup(driver.page_source,'html.parser')
-    title = soup.find_all('a',attrs={'data-qa': 'prd-itm-pttl'})
-    #price retrieves all values  
+    title = soup.find_all('a',attrs={'data-qa': 'prd-itm-pttl'}) 
     price = soup.find_all('span',attrs={'data-qa':'prd-itm-prc'})
 
     products =[]
@@ -54,5 +52,6 @@ def get_acme_products():
         time.sleep(20)
         print("done")
     driver.quit()
+    return products
 
 

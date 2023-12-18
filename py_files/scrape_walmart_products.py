@@ -9,12 +9,14 @@ import pickle
 import re
 from datetime import  datetime
 
- 
-today = datetime.now().date()
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36')
+driver = webdriver.Chrome(options=options)
+today = datetime.now().date() 
 
 
 def get_product(item):
-    driver = webdriver.Safari()
     driver.get("https://www.walmart.com/search?q={0}".format(item))
     time.sleep(2)
     soup = BeautifulSoup(driver.page_source)
@@ -41,15 +43,7 @@ def get_walmart_products():
     for item in grocery_list:
         print("current item: {0}".format(item))
         products.extend( get_product(item))
-        print("starting")
-        time.sleep(20)
-        print("waiting 1 ") 
-        time.sleep(20)
-        print("waiting 2")
-        time.sleep(20)
-        print("waiting 3")
-        time.sleep(20)
-        print("done")
-    
+        time.sleep(80)
+  
     driver.quit()
     return products

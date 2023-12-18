@@ -34,15 +34,7 @@ def get_cvs_products():
     for item in grocery_list:
         print(f"current item: {item}")
         products.extend( get_product(item))
-        print("starting")
-        time.sleep(20)
-        print("waiting 1 ") 
-        time.sleep(20)
-        print("waiting 2")
-        time.sleep(20)
-        print("waiting 3")
-        time.sleep(20)
-        print("done")
+        time.sleep(80) 
     driver.quit()
     return products    
 

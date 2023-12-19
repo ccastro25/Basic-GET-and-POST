@@ -6,23 +6,26 @@ from scrape_rite_aid import get_riteaid_products
 from scrape_shoprite_products import get_shoprite_products
 from scrape_walmart_products import get_walmart_products
 
-
-stores_info = {'acmeproducts.pickle':get_cvs_products(),'cvsproducts.pickle':get_acme_products()
-        ,'riteaidproducts.pickle':get_riteaid_products(),'shopriteproducts.pickle':get_shoprite_products()
-        ,'walmartproducts.pickle':get_walmart_products()}
-
+'''
+stores_info = {'cvsproducts.pickle':get_cvs_products,'acmeproducts.pickle':get_acme_products
+        ,'riteaidproducts.pickle':get_riteaid_products,'shopriteproducts.pickle':get_shoprite_products
+        ,'walmartproducts.pickle':get_walmart_products}
+        '''
+stores_info = {
+        'walmartproducts.pickle':get_walmart_products}
 
 def pickle_dumps():
-    for filename , products in enumerate(stores_info):
-        with open(f'../pickles/{file}','wb') as f:
-            pickle.dump(products,f)
+    for filename , func in stores_info.items():
+        with open(f'../pickles/{filename}','wb') as f:
+            pickle.dump(func(),f)
+            print("created: " , filename)
 
 def load_pickled_to_db():
-    for file in files:
+    for file in stores_info:
         print(file)
         with open(f'../pickles/{file}','rb') as f:
             data = pickle.load(f)
-            insert_data(data,file)
+            insert_data(data,file.split('.')[0])
 
 pickle_dumps()
 load_pickled_to_db()

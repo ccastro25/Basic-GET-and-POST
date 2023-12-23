@@ -6,11 +6,11 @@ from scrape_rite_aid import get_riteaid_products
 from scrape_shoprite_products import get_shoprite_products
 from scrape_walmart_products import get_walmart_products
 
-'''
-stores_info = {'cvsproducts.pickle':get_cvs_products,'acmeproducts.pickle':get_acme_products
+
+stores_info2 = {'cvsproducts.pickle':get_cvs_products,'acmeproducts.pickle':get_acme_products
         ,'riteaidproducts.pickle':get_riteaid_products,'shopriteproducts.pickle':get_shoprite_products
         ,'walmartproducts.pickle':get_walmart_products}
-        '''
+        
 stores_info = {
         'walmartproducts.pickle':get_walmart_products}
 

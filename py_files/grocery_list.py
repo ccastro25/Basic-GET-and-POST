@@ -1,3 +1,10 @@
+
+grocery_list2 =[ 'Raspberry',
+                'Egg',
+               'Milk',
+              ]
+
+
 grocery_list =[ 'Raspberry',
                 'Egg',
                 'Milk',

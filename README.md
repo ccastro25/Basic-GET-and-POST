@@ -1,4 +1,4 @@
-# Local Stores Price Comparison
+# Local Store Prices Comparison
 
 ## Overview
 This project involves scraping local stores to compare prices. The front-end is built with HTML, CSS, and JavaScript. Python is used for web scraping and writing data to a MySQL database, with Node.js serving as middleware. The project is transitioning from Selenium to Playwright for web scraping.

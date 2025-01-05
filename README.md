@@ -3,11 +3,17 @@
 ## Overview
 This project involves scraping local stores to compare prices. The front-end is built with HTML, CSS, and JavaScript. Python is used for web scraping and writing data to a MySQL database, with Node.js serving as middleware. The project is transitioning from Selenium to Playwright for web scraping.
 
+#Create python enviornment to make development and testing smoother
+-  **Create venv**: python3 -m venv VSearch
+-  **Activate**: source .venv/bin/activate
+-  **Comfirm Activation**: which python, will return yourdirectory/VSearch/bin/python
+-  **Deactivate**: deactivate
+
 ## Technologies Used
 - **Front-End**: HTML, CSS, JavaScript
 - **Back-End**: Python (web scraping)
 - **Database**: MySQL
-- **Middleware**: Node.js
+- **Middleware**: Node.js  
 - **Web Scraping**: Transitioning from Selenium to Playwright
 
 ## Instructions

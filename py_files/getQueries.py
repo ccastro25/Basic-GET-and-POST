@@ -1,5 +1,7 @@
 import datetime
 import mysql.connector
+from sqlalchemy import create_engine
+import pandas as pd
 
 cnx = mysql.connector.connect(user='scott', database='employees')
 cursor = cnx.cursor()
@@ -19,11 +21,10 @@ for (first_name, last_name, hire_date) in cursor:
 cursor.close()
 cnx.close()
 
-from sqlalchemy import create_engine
-import pandas as pd
+
 
 db_connection_str = 'mysql+pymysql://mysql_user:mysql_password@mysql_host/mysql_db'
 db_connection = create_engine(db_connection_str)
 
 df = pd.read_sql('SELECT * FROM table_name', con=db_connection)
-db_connection.close(
+db_connection.close()

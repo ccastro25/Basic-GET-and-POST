@@ -2,7 +2,6 @@ import re
 import time
 from playwright.sync_api import Playwright, sync_playwright, expect
 
-
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
@@ -32,3 +31,17 @@ def run(playwright: Playwright) -> None:
 
 with sync_playwright() as playwright:
     run(playwright)
+
+from playwright.sync_api import sync_playwright
+'''
+    thiss popup comes up at times
+def handle_popup(page):
+    try:
+        # Check if the popup is present
+        if page.query_selector('.kpl-invitation-content.sc-jTzLTM.dcUJFw'):
+            page.click('#kplDeferButton')
+            print("Popup closed.")
+    except Exception as e:
+        print(f"No popup found: {e}")
+'''
+

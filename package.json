@@ -7,5 +7,10 @@
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.6.2",
     "react-dom": "^18.2.0"
-  }
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.2"
+  },
+  "scripts": {}
 }

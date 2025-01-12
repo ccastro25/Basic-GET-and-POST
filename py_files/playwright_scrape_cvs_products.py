@@ -1,6 +1,10 @@
 import re
 import time
 from playwright.sync_api import Playwright, sync_playwright, expect
+from grocery_list import grocery_list
+from datetime import  datetime
+from bs4 import BeautifulSoup
+import pickle  
 
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False)
@@ -23,8 +27,19 @@ def run(playwright: Playwright) -> None:
     page.get_by_role("combobox", name="Search products and services").click()
     time.sleep(2)
     page.get_by_role("option", name="Search for colgate").click()
-
+    
     # ---------------------
+
+    soup = BeautifulSoup(page.content(),'html.parser')
+    price =soup.find_all('div',class_="css-901oao r-1xaesmv r-ubezar r-majxgm r-wk8lta")
+    title =soup.find_all('div',class_="css-901oao css-cens5h r-b0vftf r-1xaesmv r-ubezar r-majxgm r-29m4ib r-rjixqe r-1mnahxq r-fdjqy7 r-13qz1uu")
+
+    products =[]
+    for i,v  in enumerate(title):
+        products.append((title[i].text, re.sub('[^0-9,.]','',price[i].text), today, "CVS"))
+      
+ 
+
     context.close()
     browser.close()
 

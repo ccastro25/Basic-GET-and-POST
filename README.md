@@ -5,7 +5,7 @@ This project involves scraping local stores to compare prices. The front-end is 
 
 ## Create python enviornment to make development and testing smoother
 -  **Create venv**: python3 -m venv VSearch
--  **Activate**: source vsearch/Scripts/activate 
+-  **Activate**: vsearch/Scripts/activate 
 -  **Comfirm Activation**: which python, will return yourdirectory/VSearch/bin/python
 -  **Deactivate**: deactivate
 

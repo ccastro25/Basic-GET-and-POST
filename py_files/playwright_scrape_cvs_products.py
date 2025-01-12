@@ -29,8 +29,10 @@ def run(playwright: Playwright) -> None:
     page.get_by_role("option", name="Search for colgate").click()
     
     # ---------------------
-
-    soup = BeautifulSoup(page.content(),'html.parser')
+    #page.waitForNavigation(waitUntil="networkidle") 
+    page.wait_for_url(page.url)
+    html = page.content()
+    soup = BeautifulSoup(html,'html.parser')
     price =soup.find_all('div',class_="css-901oao r-1xaesmv r-ubezar r-majxgm r-wk8lta")
     title =soup.find_all('div',class_="css-901oao css-cens5h r-b0vftf r-1xaesmv r-ubezar r-majxgm r-29m4ib r-rjixqe r-1mnahxq r-fdjqy7 r-13qz1uu")
 

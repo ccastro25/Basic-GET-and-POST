@@ -18,6 +18,7 @@ driver = webdriver.Safari(options=options)
 today = datetime.now().date()
 
 def get_product(item):
+    
     driver.get(f"https://www.cvs.com/search?searchTerm={item}")
     time.sleep(2)
     

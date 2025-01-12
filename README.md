@@ -30,4 +30,4 @@ This project involves scraping local stores to compare prices. The front-end is 
 - **JSON to HTML Table**: Follow this [guide on converting JSON data to HTML tables using JavaScript/jQuery](https://www.tutorialspoint.com/how-to-convert-json-data-to-a-html-table-using-javascript-jquery).
 
 ## Conclusion
-This project demonstrates a comprehensive approach to scraping and comparing local store prices, leveraging a full-stack solution with modern web development technologies.
+This project demonstrates an approach to scraping and comparing local store prices, leveraging a full-stack solution with modern web development technologies.
